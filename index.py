@@ -32,4 +32,4 @@ def img(img):
 def root():
 	return template("index.tpl")
 
-run(host="10.220.221.60", port=8080, debug=True)
+run(host="localhost", port=8080, debug=True)
