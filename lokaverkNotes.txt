@@ -56,3 +56,29 @@ fyrir sql injection og slíkt. (skiptir samt engu máli)
 generator með föllum og klösum, sem tekur inn parametra
 og spítir út skipunum sem tala virka allar og tala við
 gagnagrunninn.
+
+
+# GAGNAGRUNNS HÖNNUN HÉR #
+items, users, stock
+
+items: 	iid: int primary-key not null,
+	iname: varchar(32) not null,
+	kind: varchar(16),
+	color: varchar(10),
+	count: int,
+	size: float,
+	price: int,
+	arrivalDate: date,
+	image: varchar(32)
+
+users:	uid: int primary-key not null,
+	username: varchar(16),
+	passwd: varchar(16),
+	email: varchar(24),
+	isAdmin: bool,
+	fname: varchar,
+	lname: varchar
+
+stock:	totalPrice: int,
+	amountOfItems: int
+	
