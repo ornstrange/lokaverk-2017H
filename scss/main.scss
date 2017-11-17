@@ -90,6 +90,23 @@ header {
 		float: right;
 	}
 
+	.srch-inp {
+		position: fixed;
+		width: 0;
+		background: transparent;
+		font-size: 18px;
+		border: 0;
+		height: 32px;
+		right: calc(10% + 72px);
+		top: 24px;
+		transition: .3s all ease;
+	}
+
+	.srch-inp-active {
+		background: #fff;
+		width: 250px;
+	}
+
 	.title {
 		font-size: 42px;
 		letter-spacing: 8px;

@@ -14,7 +14,10 @@
 		<div class="items">
 			<button class="menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
 			<h1 class="title">LATE</h1>
-			<button class="search"><i class="fa fa-search" aria-hidden="true"></i></button>
+			<form action="/search">
+			<input type="text" class="srch-inp" id="srch-inp" name="s">
+			</form>
+			<button class="search"><i class="fa fa-search" aria-hidden="true" id="srch-btn"></i></button>
 		</div>
 	</header>
 	<section class="land-page">
@@ -24,5 +27,14 @@
 			<li class="tops"><a href="/search?s=top">tops</a></li>
 		</ul>
 	</section>
+	<script
+	src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+	<script>
+		$('#srch-btn').click(function(){
+			$("#srch-inp").addClass("srch-inp-active");
+		});
+	</script>
 </body>
 </html>
