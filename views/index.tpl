@@ -19,9 +19,9 @@
 	</header>
 	<section class="land-page">
 		<ul class="land-list">
-			<li class="dresses"><a href="">dresses</a></li>
-			<li class="jackets"><a href="">jackets</a></li>
-			<li class="tops"><a href="">tops</a></li>
+			<li class="dresses"><a href="/search?s=dress">dresses</a></li>
+			<li class="jackets"><a href="/search?s=jacket">jackets</a></li>
+			<li class="tops"><a href="/search?s=top">tops</a></li>
 		</ul>
 	</section>
 </body>

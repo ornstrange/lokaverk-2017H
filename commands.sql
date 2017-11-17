@@ -10,7 +10,7 @@ CREATE TABLE items (
     size FLOAT,
     price INT,
     arrivalDate DATE,
-    image VARCHAR(100)
+    img VARCHAR(100)
 );
 
 CREATE TABLE users (
@@ -18,7 +18,7 @@ CREATE TABLE users (
     username VARCHAR(32) NOT NULL,
     passwd VARCHAR(32) NOT NULL,
     email VARCHAR(64) NOT NULL,
-    isAdmin BOOL,
+    isAdmin BOOLEAN,
     fname VARCHAR(32),
     lname VARCHAR(32)
 );
@@ -26,4 +26,11 @@ CREATE TABLE users (
 CREATE TABLE stock (
     totalPrice INT,
     amtOfItems INT
+);
+
+CREATE TABLE cart (
+    iid INT NOT NULL,
+    uid INT NOT NULL,
+    FOREIGN KEY (iid) REFERENCES items(iid),
+    FOREIGN KEY (uid) REFERENCES users(uid)
 );
