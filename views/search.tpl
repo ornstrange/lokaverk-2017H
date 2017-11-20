@@ -17,6 +17,10 @@
 			<button class="search"><i class="fa fa-search" aria-hidden="true"></i></button>
 		</div>
 	</header>
-	<p>ég er search</p>
+	<div class="images">
+	% for i in items:
+		<img class="pic" src="http://{{all[i-1]["img"]}}" alt="">
+	% end
+	</div>
 </body>
 </html>

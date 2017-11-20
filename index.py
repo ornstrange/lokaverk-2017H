@@ -1,5 +1,6 @@
 from bottle import *
 from pymysql import connect, cursors
+from re import search, compile
 
 CONNECTION = connect(host='tsuts.tskoli.is',
                      user='1910952789',
@@ -31,20 +32,29 @@ def get_data():
 
 
 data = get_data()
-print(data)
+# print(data)
 
 
 def search_items(string):
     datalist = []
-    if string == "+new":
+    if string == "$new":
+        print("jas")
         for i in data[1]:
-            if i["new"] == "true":
+            if i["new"]:
                 datalist.append(i["iid"])
         return datalist
+    string = string.lower()
     for i in data[1]:
-        if string in [i["iname"], i["kind"], i["color"]]:
+        if search_string(string, i):
             datalist.append(i["iid"])
     return datalist
+
+
+def search_string(s, l):
+    pattern = compile(s)
+    if pattern.search(l["iname"].lower()) or pattern.search(l["color"]) or pattern.search(l["kind"]):
+        return True
+    return False
 
 
 @route("/css/main.css")
@@ -71,7 +81,7 @@ def root():
 def search():
     srch = request.query.s
     items = search_items(srch)
-    return str(items)
+    return template("search.tpl", items=items, all=data[1])
 
 
 run(host="localhost", port=8080, debug=True)
