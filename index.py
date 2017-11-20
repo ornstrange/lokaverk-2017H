@@ -35,19 +35,20 @@ data = get_data()
 # print(data)
 
 
-def search_items(string):
-    datalist = []
-    if string == "$new":
-        print("jas")
+def search_items(strings):
+    strings.split(" ")
+    for string in strings:
+        datalist = []
+        if string == "$new":
+            for i in data[1]:
+                if i["new"]:
+                    datalist.append(i["iid"])
+            return datalist
+        string = string.lower()
         for i in data[1]:
-            if i["new"]:
+            if search_string(string, i):
                 datalist.append(i["iid"])
         return datalist
-    string = string.lower()
-    for i in data[1]:
-        if search_string(string, i):
-            datalist.append(i["iid"])
-    return datalist
 
 
 def search_string(s, l):

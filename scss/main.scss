@@ -221,12 +221,58 @@ header {
 	}
 }
 
-.images {
-	display: grid;
+.products {
 	width: 100vw;
-	grid-template-columns: 1fr 1fr 1fr 1fr;
-	grid-template-rows: auto;
-	.pic {
-		width: 100%;
+	background: $white;
+	.items-container {
+		display: grid;
+		margin: 0 auto;
+		width: 80vw;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-rows: auto;
+		grid-gap: 32px;
+		// background: $white;
+		.item {
+			padding: 16px;
+			background: $white;
+			outline: 4px solid $pink;
+			height: 82%;
+			img {
+				width: 100%;
+			}
+			.price {
+				font-size: 42px;
+				font-weight: 600;
+				letter-spacing: 2px;
+				position: relative;
+				text-align: center;
+				top: -260px;
+				left: 100px;
+				width: 160px;
+				height: 64px;
+				line-height: 64px;
+				background: transparent;
+				outline: 4px solid transparent;
+				outline-offset: -8px;
+				color: transparent;
+				transition: .3s all ease;
+			}
+			.text {
+				text-align: left;
+				letter-spacing: 1px;
+				// font-weight: 600;
+				font-size: 24px;
+			}
+		}
+		.item:hover {
+			.price {
+				color: $black;
+				background: $white;
+				outline: 4px solid $pink;
+			}
+			img {
+				transform: scale(1.1);
+			}
+		}
 	}
 }

@@ -10,17 +10,58 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-	<header>
-		<div class="items">
-			<button class="menu"><i class="fa fa-bars" aria-hidden="true"></i></button>
-			<h1 class="title">LATE</h1>
-			<button class="search"><i class="fa fa-search" aria-hidden="true"></i></button>
+	%include("header.tpl")
+	<section class="products">
+		<div class="items-container">
+		% for i in items:
+			<div class="item">
+				<img src="http://{{all[i-1]["img"]}}">
+				<p class="text">{{all[i-1]["iname"]}}</p>
+				<p class="price">{{all[i-1]["price"]}}&euro;</p>
+			</div>
+		% end
 		</div>
-	</header>
-	<div class="images">
-	% for i in items:
-		<img class="pic" src="http://{{all[i-1]["img"]}}" alt="">
-	% end
-	</div>
+	</section>
+	<script
+	src="https://code.jquery.com/jquery-3.2.1.min.js"
+	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	crossorigin="anonymous"></script>
+	<script>
+		var srchClicked = false;
+		var menuClicked = false;
+		$('#menu-btn').click(function(){
+			if (!menuClicked) {
+				$("#menu-cont").addClass("menu-content-active");
+				menuClicked = true;
+			}
+		});
+		$('html').click(function() {
+			if (menuClicked) {
+				$("#menu-cont").removeClass("menu-content-active");
+				menuClicked = false;
+			}
+		});
+		$('#menu-btn').click(function(event){
+			event.stopPropagation();
+		});
+		$('#menu-cont').click(function(event){
+			event.stopPropagation();
+		});
+		$('#srch-btn').click(function(){
+			if (!srchClicked) {
+				srchClicked = true;
+				$("#srch-inp").addClass("srch-inp-active");
+				document.getElementById('srch-inp').focus();
+			} else {
+				srchClicked = false;
+				var srchString = $("#srch-inp").val();
+				if (srchString == "") {
+					$("#srch-inp").removeClass("srch-inp-active");
+				} else {
+					window.location.href = "/search?s="+srchString;
+				}
+			}
+		});
+	</script>
 </body>
 </html>
