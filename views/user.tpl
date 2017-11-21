@@ -10,14 +10,18 @@
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-	% include("header.tpl")
-	<div class="land-page">
-		<ul class="land-list">
-			<li class="dresses"><a href="/search?s=dress">dresses</a></li>
-			<li class="jackets"><a href="/search?s=jacket">jackets</a></li>
-			<li class="tops"><a href="/search?s=top">tops</a></li>
-		</ul>
-	</div>
+	%include("header.tpl")
+	<section class="signin">
+		<form>
+			<input type="text" name="uname" placeholder="username">
+			<input type="password" name="pass" placeholder="passsword">
+			<input class="in" type="submit" name="signin" value="sign in">
+		</form>
+		<form>
+		<input class="up" type="submit" name="signup" value="sign up">
+		</form>
+	</section>
+
 	<script
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

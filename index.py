@@ -84,5 +84,8 @@ def search():
     items = search_items(srch)
     return template("search.tpl", items=items, all=data[1])
 
+@route("/user")
+def user():
+    return template("user.tpl")
 
 run(host="localhost", port=8080, debug=True)
