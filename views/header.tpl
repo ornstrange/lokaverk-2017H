@@ -1,5 +1,4 @@
 <header>
-
 	<div class="items">
 		<button class="menu"><i class="fa fa-bars" aria-hidden="true" id="menu-btn"></i></button>
 		<div class="menu-content" id="menu-cont">
@@ -17,12 +16,8 @@
 		<h1 class="title">LATE</h1>
 		
 		<form action="/search">
-		<input type="text" class="srch-inp" id="srch-inp" name="s" placeholder="search">
+			<input type="text" class="srch-inp" id="srch-inp" name="s" placeholder="search">
 		</form>
 		<button class="search"><i class="fa fa-search" aria-hidden="true" id="srch-btn"></i></button>
-		<form action="/user">
-		<button class="user"><i class="fa fa-user-o" aria-hidden="true"></i></botton>
-		</form>
 	</div>
-
 </header>
