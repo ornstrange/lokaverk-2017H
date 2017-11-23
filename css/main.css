@@ -72,55 +72,64 @@ header .menu {
 }
 
 header .menu-content {
-  z-index: -1;
-  transform: scale(0);
-  transform-origin: -4.5% -2.5%;
+  transform-origin: top;
   position: fixed;
-  top: 32px;
-  left: calc(10% + 20px);
-  background: #FFF;
+  top: 80px;
+  left: 10%;
   color: #AAA;
   width: 192px;
+  height: 0;
   font-size: 18px;
-  font-weight: 600;
-  outline: 8px solid #FFF;
-  border: 4px solid #FFCED2;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-  padding: 8px;
-  transition: .3s transform ease-out;
+  text-transform: uppercase;
+  outline: 0 solid #000;
+  box-shadow: 0;
+  background: transparent;
+  padding: 4px;
+  transition: .3s all ease-out;
+  overflow: hidden;
+  pointer-events: none;
 }
 
 header .menu-content .item {
-  height: 48px;
+  height: 40px;
   background: #FFF;
+  color: #FFF;
+  transition: .3s color ease-out;
 }
 
 header .menu-content .item:hover {
   color: #000;
-  outline: 4px solid #FFCED2;
-  outline-offset: -4px;
+  outline: 1px solid #000;
+  outline-offset: -3px;
 }
 
 header .menu-content .item a {
   display: block;
-  height: 48px;
-  line-height: 48px;
+  height: 40px;
+  line-height: 40px;
   padding-left: 16px;
 }
 
 header .menu-content .filler {
-  height: 4px;
-  background: #DDD;
-  margin: 8px 0;
+  height: 1px;
+  background: #000;
+  margin: 4px 0;
 }
 
 header .menu-content .filler:hover {
-  background: #DDD;
+  background: #000;
 }
 
 header .menu-content-active {
-  z-index: 1;
-  transform: scale(1);
+  height: 288px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  outline: 1px solid #000;
+  background: #FFF;
+  pointer-events: initial;
+}
+
+header .menu-content-active .item {
+  color: #AAA;
 }
 
 header .search {

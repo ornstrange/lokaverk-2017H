@@ -5,6 +5,9 @@ $('#menu-btn').click(function(){
 	if (!menuClicked) {
 		$("#menu-cont").addClass("menu-content-active");
 		menuClicked = true;
+	} else {
+		$("#menu-cont").removeClass("menu-content-active");
+		menuClicked = false;
 	}
 });
 
