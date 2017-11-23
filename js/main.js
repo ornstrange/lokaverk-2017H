@@ -1,10 +1,6 @@
 var srchClicked = false;
 var menuClicked = false;
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
 $('#menu-btn').click(function(){
 	if (!menuClicked) {
 		$("#menu-cont").addClass("menu-content-active");
@@ -55,14 +51,12 @@ $("[class*=iid-]").hover(function() {
 		}
 	}
 }, function() {
-	sleep(1000);
 	var icount = 0;
 	var items = [];
 	$("[class*=iid-]").each(function(j, obj) {
 		icount = j;
 		items.push(obj.className.substr(9).replace(" blurred", ""));
 	});
-	console.log(items)
 	for (var i = 0; i < icount; i++) {
 		$(".iid-"+items[i]).removeClass("blurred");
 	}
