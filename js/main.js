@@ -1,6 +1,10 @@
 var srchClicked = false;
 var menuClicked = false;
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 $('#menu-btn').click(function(){
 	if (!menuClicked) {
 		$("#menu-cont").addClass("menu-content-active");
@@ -37,11 +41,31 @@ $('#srch-btn').click(function(){
 	}
 });
 
-$("[class*=iid-]").mouseover(
-	function() {
-		var c = this.className;
-   		console.log(c);
+$("[class*=iid-]").hover(function() {
+	var icount = 0;
+	var items = [];
+	$("[class*=iid-]").each(function(j, obj) {
+		icount = j;
+		items.push(obj.className.substr(9));
+	});
+	var iid = this.className.substr(9);
+	for (var i = 0; i < icount; i++) {
+		if (items[i] != iid) {
+			$(".iid-"+items[i]).addClass("blurred");
+		}
 	}
-);
+}, function() {
+	sleep(1000);
+	var icount = 0;
+	var items = [];
+	$("[class*=iid-]").each(function(j, obj) {
+		icount = j;
+		items.push(obj.className.substr(9).replace(" blurred", ""));
+	});
+	console.log(items)
+	for (var i = 0; i < icount; i++) {
+		$(".iid-"+items[i]).removeClass("blurred");
+	}
+});
 
 $("img.lazy").lazyload();

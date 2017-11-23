@@ -15,8 +15,8 @@
 		<div class="items-container">
 		% for i in items:
 			<a href="/item?id={{all[i-1]["iid"]}}" class="item iid-{{all[i-1]["iid"]}}">
-				<img class="lazy" src="img/temp.gif" data-original="http://{{all[i-1]["img"]}}">
-				<p class="text">{{all[i-1]["iname"]}}</p>
+				<img class="lazy" src="img/temp.gif" data-original="img/items/item-{{all[i-1]["iid"]}}.jpg">
+				<p class="text">{{all[i-1]["iname"].upper()}}</p>
 				<p class="price">{{all[i-1]["price"]}}&euro;</p>
 			</a>
 		% end
