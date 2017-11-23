@@ -14,11 +14,11 @@
 	<section class="products">
 		<div class="items-container">
 		% for i in items:
-			<div class="item">
-				<img src="http://{{all[i-1]["img"]}}">
+			<a href="/item?id={{all[i-1]["iid"]}}" class="item iid-{{all[i-1]["iid"]}}">
+				<img class="lazy" src="img/temp.gif" data-original="http://{{all[i-1]["img"]}}">
 				<p class="text">{{all[i-1]["iname"]}}</p>
 				<p class="price">{{all[i-1]["price"]}}&euro;</p>
-			</div>
+			</a>
 		% end
 		</div>
 	</section>
@@ -26,6 +26,7 @@
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
+	<script src="js/jquery.lazyload.js"></script>
 	<script src="js/main.js"></script>
 </body>
 </html>

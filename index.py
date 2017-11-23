@@ -72,19 +72,13 @@ def search_items(strings):
                 datalist.append(i["iid"])
     return datalist
 
+@route("/css/<css:path>")
+def cssnorm(css):
+    return static_file(css, "./css")
 
-@route("/css/main.css")
-def cssmain():
-    return static_file("main.css", "./css")
-
-
-@route("/css/normalize.css")
-def cssnorm():
-    return static_file("normalize.css", "./css")
-
-@route("/js/main.js")
-def jsmain():
-    return static_file("main.js", "./js")
+@route("/js/<js:path>")
+def jsload(js):
+    return static_file(js, "./js")
 
 @route("/img/<img:path>")
 def img(img):
@@ -100,7 +94,6 @@ def root():
 def search():
     srch = request.query.s
     items = search_items(srch)
-    print(items)
     return template("search.tpl", items=items, all=data[1])
 
 run(host="localhost", port=8080, debug=True)

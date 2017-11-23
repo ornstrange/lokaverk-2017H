@@ -231,58 +231,45 @@ header {
 .products {
 	width: 100vw;
 	background: $white;
+
 	.items-container {
 		display: grid;
 		margin: 0 auto;
 		width: 80vw;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-template-rows: auto;
-		grid-gap: 32px;
-		
+		grid-gap: 16px;
+
 		.item {
-			padding: 16px;
-			background: $white;
-			outline: 4px solid $pink;
-			height: 82%;
-
-			&:hover {
-				.price {
-					color: $black;
-					background: $white;
-					outline: 4px solid $pink;
-				}
-
-				img {
-					filter: grayscale(1);
-				}
-			}
+			outline: 1px solid black;
+			outline-offset: -1px;
+			padding: 8px;
+			// height: 80%;
 
 			img {
 				width: 100%;
-			}
-			
-			.price {
-				font-size: 42px;
-				font-weight: 600;
-				letter-spacing: 2px;
-				position: relative;
-				text-align: center;
-				top: -260px;
-				left: 100px;
-				width: 160px;
-				height: 64px;
-				line-height: 64px;
-				background: transparent;
-				outline: 4px solid transparent;
-				outline-offset: -8px;
-				color: transparent;
-				transition: .3s all ease;
+				margin: 0;
 			}
 
 			.text {
-				text-align: left;
-				letter-spacing: 1px;
-				font-size: 24px;
+				height: 18px;
+				margin: 0 auto;
+				width: calc(100%-8px);
+				font-size: 14px;
+				padding: 4px;
+				// background: $black;
+				// color: $white;
+			}
+
+			.price {
+				text-align: center;
+				margin: 8px 0 4px 0;
+			}
+		}
+
+		.blurred {
+			img {
+				filter: blur(1px) grayscale(50%);
 			}
 		}
 	}

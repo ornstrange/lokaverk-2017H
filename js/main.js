@@ -1,11 +1,13 @@
 var srchClicked = false;
 var menuClicked = false;
+
 $('#menu-btn').click(function(){
 	if (!menuClicked) {
 		$("#menu-cont").addClass("menu-content-active");
 		menuClicked = true;
 	}
 });
+
 $('html').click(function() {
 	if (menuClicked) {
 		$("#menu-cont").removeClass("menu-content-active");
@@ -18,6 +20,7 @@ $('#menu-btn').click(function(event){
 $('#menu-cont').click(function(event){
 	event.stopPropagation();
 });
+
 $('#srch-btn').click(function(){
 	if (!srchClicked) {
 		srchClicked = true;
@@ -33,3 +36,12 @@ $('#srch-btn').click(function(){
 		}
 	}
 });
+
+$("[class*=iid-]").mouseover(
+	function() {
+		var c = this.className;
+   		console.log(c);
+	}
+);
+
+$("img.lazy").lazyload();
