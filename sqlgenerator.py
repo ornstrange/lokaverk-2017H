@@ -7,21 +7,27 @@ CONNECTION = connect(host='tsuts.tskoli.is',
                      charset='utf8mb4',
                      cursorclass=cursors.DictCursor)
 
+
 class Sql:
     def __init__(self, table):
         self.table = table
 
     def all(self):
-        return "SELECT * FROM " + self.table
+        return "SELECT * FROM " + self.table + ";"
 
     def select(self, data="*", where="", whereval="", operator="="):
-        query = "SELECT " + str(data) + " FROM " + self.table
+        if isinstance(data, tuple):
+            query = "SELECT " + str(data)[1:-1] + " FROM " + self.table
+        else:
+            query = "SELECT " + str(data) + " FROM " + self.table
         if where:
             if isinstance(where, tuple):
                 if whereval != "":
-                    query += " WHERE " + where[0] + " " + operator + " " + whereval[0]
+                    query += " WHERE " + where[0] + \
+                        " " + operator + " " + whereval[0]
                     for i in range(1, len(where)):
-                        query += " AND " + where[i] + " " + operator + " " + whereval[i]
+                        query += " AND " + where[i] + \
+                            " " + operator + " " + whereval[i]
                 else:
                     return "SELECT * FROM " + self.table + ";"
             else:
@@ -42,23 +48,30 @@ class Sql:
         if where:
             if isinstance(where, tuple):
                 if whereval != "":
-                    query += " WHERE " + where[0] + " " + operator + " " + whereval[0]
+                    query += " WHERE " + where[0] + \
+                        " " + operator + " " + whereval[0]
                     for i in range(1, len(where)):
-                        query += " AND " + where[i] + " " + operator + " " + whereval[i]
+                        query += " AND " + where[i] + \
+                            " " + operator + " " + whereval[i]
                 else:
                     return "SELECT * FROM " + self.table + ";"
             else:
                 query += " WHERE " + where + " " + operator + " " + whereval
         return query + ";"
 
-    def delete(self, data="", where="", whereval=""):
-        query = "DELETE " + str(data) + " FROM " + self.table
+    def delete(self, data="", where="", whereval="", operator="="):
+        if isinstance(data, tuple):
+            query = "DELETE " + str(data)[1:-1] + " FROM " + self.table
+        else:
+            query = "DELETE " + str(data) + " FROM " + self.table
         if where:
             if isinstance(where, tuple):
                 if whereval != "":
-                    query += " WHERE " + where[0] + " " + operator + " " + whereval[0]
+                    query += " WHERE " + where[0] + \
+                        " " + operator + " " + whereval[0]
                     for i in range(1, len(where)):
-                        query += " AND " + where[i] + " " + operator + " " + whereval[i]
+                        query += " AND " + where[i] + \
+                            " " + operator + " " + whereval[i]
                 else:
                     return "SELECT * FROM " + self.table + ";"
             else:
@@ -71,25 +84,19 @@ class Sql:
                 return "SELECT * FROM " + self.table
         return query + ";"
 
+
 def executeQuery(s):
     if "SELECT" in s:
         try:
             with CONNECTION.cursor() as cursor:
-                data = []
                 cursor.execute(s)
-                query = cursor.fetchall()
-                data.append(query)
-                return data
+                return cursor.fetchall()
         finally:
-            CONNECTION.close()
+            cursor.close()
     else:
         try:
             with CONNECTION.cursor() as cursor:
-                data = []
-                sql = s
+                cursor.execute(s)
+            CONNECTION.commit()
         finally:
-            CONNECTION.close()
-
-ITEMS = Sql("items")
-USERS = Sql("users")
-print(ITEMS.delete())
+            cursor.close()

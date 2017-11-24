@@ -1,37 +1,17 @@
 from bottle import *
-from pymysql import connect, cursors
+from sqlgenerator import *
 
-CONNECTION = connect(host='tsuts.tskoli.is',
-                     user='1910952789',
-                     password='mypassword',
-                     db='1910952789_fatasida',
-                     charset='utf8mb4',
-                     cursorclass=cursors.DictCursor)
+ITEMS = Sql("items")
+USERS = Sql("users")
 
 
-def get_data():
-    try:
-        with CONNECTION.cursor() as cursor:
-            data = []
-            sql = "SELECT * FROM `users`"
-            cursor.execute(sql)
-            users = cursor.fetchall()
-            data.append(users)
-            sql = "SELECT * FROM `items`"
-            cursor.execute(sql)
-            items = cursor.fetchall()
-            data.append(items)
-            sql = "SELECT * FROM `cart`"
-            cursor.execute(sql)
-            cart = cursor.fetchall()
-            data.append(cart)
-            return data
-    finally:
-        CONNECTION.close()
+def updateData():
+    data = [executeQuery(ITEMS.all()), executeQuery(USERS.all())]
+    return data
 
 
-data = get_data()
-# print(data)
+data = updateData()
+items, users = data[0], data[1]
 
 
 def search_items(strings):
@@ -42,28 +22,28 @@ def search_items(strings):
         string = strings[0]
 
     if string == "$new":
-        for i in data[1]:
+        for i in items:
             if i["new"]:
                 datalist.append(i["iid"])
         return datalist
     elif string == "$dress":
-        for i in data[1]:
+        for i in items:
             if i["kind"] == "dress":
                 datalist.append(i["iid"])
         return datalist
     elif string == "$top":
-        for i in data[1]:
+        for i in items:
             if i["kind"] == "top":
                 datalist.append(i["iid"])
         return datalist
     elif string == "$jacket":
-        for i in data[1]:
+        for i in items:
             if i["kind"] == "jacket":
                 datalist.append(i["iid"])
         return datalist
 
     for s in strings:
-        for i in data[1]:
+        for i in items:
             if s in i["iname"]:
                 datalist.append(i["iid"])
             elif s in i["kind"]:
@@ -72,13 +52,16 @@ def search_items(strings):
                 datalist.append(i["iid"])
     return datalist
 
+
 @route("/css/<css:path>")
 def cssnorm(css):
     return static_file(css, "./css")
 
+
 @route("/js/<js:path>")
 def jsload(js):
     return static_file(js, "./js")
+
 
 @route("/img/<img:path>")
 def img(img):
@@ -87,13 +70,16 @@ def img(img):
 
 @route("/")
 def root():
+    updateData()
     return template("index.tpl")
 
 
 @route("/search")
 def search():
+    updateData()
     srch = request.query.s
-    items = search_items(srch)
-    return template("search.tpl", items=items, all=data[1])
+    found = search_items(srch)
+    return template("search.tpl", items=found, all=items)
+
 
 run(host="localhost", port=8080, debug=True)
