@@ -20,5 +20,17 @@
 		</form>
 		<button class="search"><i class="fa fa-search" aria-hidden="true" id="srch-btn"></i></button>
 	</div>
+	<div class="user-items">
+		<button class="user"><i class="fa fa-user" aria-hidden="true" id="user-btn"></i></button>
+		<div class="user-content" id="user-cont">
+			<ul>
+				<li class="item"><button id="login-btn">sign in</button></li>
+				<li class="item"><button id="sign-btn">sign up</button></li>
+				<li class="item"><button id="logout-btn">sign out</button></li>
+				<li class="filler"></li>
+				<li class="item"><button id="cart-btn">cart</button></li>
+			</ul>
+		</div>
+	</div>
 </header>
 <script src="js/main.js"></script>

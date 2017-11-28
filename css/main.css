@@ -7,6 +7,7 @@ body {
   width: 100%;
   margin: 0 auto;
   background: url("../img/pattern.png");
+  overflow-x: hidden;
 }
 
 button {
@@ -63,7 +64,7 @@ header .items {
   justify-content: center;
 }
 
-header .menu {
+header .items .menu {
   font-size: 32px;
   width: 64px;
   height: 60px;
@@ -71,7 +72,7 @@ header .menu {
   float: left;
 }
 
-header .menu-content {
+header .items .menu-content {
   position: relative;
   z-index: 99;
   top: 44px;
@@ -90,37 +91,37 @@ header .menu-content {
   pointer-events: none;
 }
 
-header .menu-content .item {
+header .items .menu-content .item {
   height: 40px;
   background: transparent;
   color: #FFF;
   transition: .3s color ease-out;
 }
 
-header .menu-content .item:hover {
+header .items .menu-content .item:hover {
   color: #000;
   outline: 1px solid #000;
   outline-offset: -3px;
 }
 
-header .menu-content .item a {
+header .items .menu-content .item a {
   display: block;
   height: 40px;
   line-height: 40px;
   padding-left: 8px;
 }
 
-header .menu-content .filler {
+header .items .menu-content .filler {
   height: 1px;
   background: #000 !important;
   margin: 4px 0;
 }
 
-header .menu-content .filler:hover {
+header .items .menu-content .filler:hover {
   background: #000;
 }
 
-header .menu-content-active {
+header .items .menu-content-active {
   height: 290px;
   top: 189px;
   outline: 1px solid #000;
@@ -128,12 +129,12 @@ header .menu-content-active {
   pointer-events: initial;
 }
 
-header .menu-content-active .item {
+header .items .menu-content-active .item {
   color: #AAA;
   background: #FFF;
 }
 
-header .search {
+header .items .search {
   font-size: 32px;
   width: 64px;
   height: 60px;
@@ -141,7 +142,7 @@ header .search {
   float: right;
 }
 
-header .srch-inp {
+header .items .srch-inp {
   position: fixed;
   width: 0;
   background: transparent;
@@ -154,12 +155,12 @@ header .srch-inp {
   padding-left: 8px;
 }
 
-header .srch-inp-active {
+header .items .srch-inp-active {
   background: #fff;
   width: 250px;
 }
 
-header .title {
+header .items .title {
   font-size: 42px;
   letter-spacing: 8px;
   color: #FFF;
@@ -167,6 +168,66 @@ header .title {
   height: 64px;
   text-align: center;
   line-height: 64px;
+}
+
+header .user-items {
+  font-size: 18px;
+}
+
+header .user-items .user {
+  position: absolute;
+  font-size: 32px;
+  width: 64px;
+  height: 60px;
+  margin: 0;
+  float: right;
+  top: 10px;
+  right: 10px;
+}
+
+header .user-items .user-content {
+  box-sizing: border-box;
+  position: absolute;
+  right: -120px;
+  top: 79px;
+  background: #FFF;
+  border: 1px solid #000;
+  height: 168px;
+  width: 120px;
+  padding-top: 2px;
+  box-shadow: -2px 4px 8px rgba(0, 0, 0, 0.15);
+  transition: .3s right ease;
+}
+
+header .user-items .user-content .item {
+  height: 32px;
+  width: 100px;
+  margin-top: 8px;
+  margin-left: 8px;
+}
+
+header .user-items .user-content .item button {
+  transition: none;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  text-align: left;
+  width: 100px;
+}
+
+header .user-items .user-content .item button:hover {
+  color: #000 !important;
+  transform: none;
+}
+
+header .user-items .user-content .filler {
+  height: 1px;
+  width: 104px;
+  background: #000;
+  margin: 4px 0 4px 8px;
+}
+
+header .user-items .user-content-active {
+  right: 0;
 }
 
 .land-page {

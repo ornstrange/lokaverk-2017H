@@ -20,6 +20,7 @@ body {
 	width: 100%;
 	margin: 0 auto;
 	background: url("../img/pattern.png");
+	overflow-x: hidden;
 }
 
 button {
@@ -57,8 +58,8 @@ a {
 	text-decoration: none;
 }
 
-
 // MAIN
+// HEADER
 header {
 	width: 100%;
 	background: $black;
@@ -74,113 +75,175 @@ header {
 		margin: 0 auto;
 		align-items: center;
 		justify-content: center;
-	}
 
-	.menu {
-		font-size: 32px;
-		width: 64px;
-		height: 60px;
-		margin: 0;
-		float: left;
-	}
-
-	.menu-content {
-		position: relative;
-		z-index: 99;
-		top: 44px;
-		left: -48px;
-		color: $gray;
-		width: 200px;
-		height: 0;
-		font-size: 18px;
-		text-transform: uppercase;
-		outline: 0 solid $black;
-		box-shadow: 0;
-		background: $white;
-		padding: 4px;
-		transition: .3s all ease-out;
-		overflow: hidden;
-		pointer-events: none;
-
-		.item {
-			height: 40px;
-			background: transparent;
-			color: $white;
-			transition: .3s color ease-out;
-
-			&:hover {
-				color: $black;
-				outline: 1px solid $black;
-				outline-offset: -3px;
-			}
-
-			a {
-				display: block;
-				height: 40px;
-				line-height: 40px;
-				padding-left: 8px;
-			}
+		.menu {
+			font-size: 32px;
+			width: 64px;
+			height: 60px;
+			margin: 0;
+			float: left;
 		}
-		
-		.filler {
-			height: 1px;
-			background: $black !important;
-			margin: 4px 0;
-		
-			&:hover {
-				background: $black;
-			}
-		}
-	}
-	.menu-content-active {
-		height: 290px;
-		top: 189px;
-		outline: 1px solid $black;
-		background: $white;
-		pointer-events: initial;
 
-		.item {
+		.menu-content {
+			position: relative;
+			z-index: 99;
+			top: 44px;
+			left: -48px;
 			color: $gray;
+			width: 200px;
+			height: 0;
+			font-size: 18px;
+			text-transform: uppercase;
+			outline: 0 solid $black;
+			box-shadow: 0;
 			background: $white;
+			padding: 4px;
+			transition: .3s all ease-out;
+			overflow: hidden;
+			pointer-events: none;
+
+			.item {
+				height: 40px;
+				background: transparent;
+				color: $white;
+				transition: .3s color ease-out;
+
+				&:hover {
+					color: $black;
+					outline: 1px solid $black;
+					outline-offset: -3px;
+				}
+
+				a {
+					display: block;
+					height: 40px;
+					line-height: 40px;
+					padding-left: 8px;
+				}
+			}
+			
+			.filler {
+				height: 1px;
+				background: $black !important;
+				margin: 4px 0;
+			
+				&:hover {
+					background: $black;
+				}
+			}
+		}
+		.menu-content-active {
+			height: 290px;
+			top: 189px;
+			outline: 1px solid $black;
+			background: $white;
+			pointer-events: initial;
+
+			.item {
+				color: $gray;
+				background: $white;
+			}
+		}
+
+		.search {
+			font-size: 32px;
+			width: 64px;
+			height: 60px;
+			margin: 0;
+			float: right;
+		}
+
+		.srch-inp {
+			position: fixed;
+			width: 0;
+			background: transparent;
+			font-size: 18px;
+			border: 0;
+			height: 32px;
+			right: calc(10% + 62px);
+			top: 24px;
+			transition: .3s all ease;
+			padding-left: 8px;
+		}
+		.srch-inp-active {
+			background: #fff;
+			width: 250px;
+		}
+
+		.title {
+			font-size: 42px;
+			letter-spacing: 8px;
+			color: $white;
+			width: 100%;
+			height: 64px;
+			text-align: center;
+			line-height: 64px;
 		}
 	}
 
-	.search {
-		font-size: 32px;
-		width: 64px;
-		height: 60px;
-		margin: 0;
-		float: right;
-	}
-
-	.srch-inp {
-		position: fixed;
-		width: 0;
-		background: transparent;
+	.user-items {
 		font-size: 18px;
-		border: 0;
-		height: 32px;
-		right: calc(10% + 62px);
-		top: 24px;
-		transition: .3s all ease;
-		padding-left: 8px;
-	}
-	.srch-inp-active {
-		background: #fff;
-		width: 250px;
-	}
 
-	.title {
-		font-size: 42px;
-		letter-spacing: 8px;
-		color: $white;
-		width: 100%;
-		height: 64px;
-		text-align: center;
-		line-height: 64px;
+		.user {
+			position: absolute;
+			font-size: 32px;
+			width: 64px;
+			height: 60px;
+			margin: 0;
+			float: right;
+			top: 10px;
+			right: 10px;
+		}
+
+		.user-content {
+			// display: none;
+			box-sizing: border-box;
+			position: absolute;
+			right: -120px;
+			top: 79px;
+			background: $white;
+			border: 1px solid $black;
+			height: 168px;
+			width: 120px;
+			padding-top: 2px;
+			box-shadow: -2px 4px 8px rgba(0,0,0,.15);
+			transition: .3s right ease;
+
+			.item {
+				height: 32px;
+				width: 100px;
+				margin-top: 8px;
+				margin-left: 8px;
+				
+				button {
+					transition: none;
+					font-weight: 600 !important;
+					text-transform: uppercase !important;
+					text-align: left;
+					width: 100px;
+
+					&:hover {
+						color: $black !important;
+						transform: none;
+					}
+				}
+			}
+
+			.filler {
+				height: 1px;
+				width: 104px;
+				background: $black;
+				margin: 4px 0 4px 8px;
+			}
+		}
+
+		.user-content-active {
+			right: 0;
+		}
 	}
 }
 
+// LAND PAGE
 .land-page {
 	width: 100%;
 	overflow: hidden;
@@ -224,6 +287,7 @@ header {
 	}
 }
 
+// ITEMS
 .products {
 	width: calc(100vw-1px);
 	background: $white;
