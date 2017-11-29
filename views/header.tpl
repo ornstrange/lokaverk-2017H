@@ -35,8 +35,8 @@
 	</div>
 
 	<div class="login" id="login-cont">
-		<button id="close-login" class="close"></button>
 		<form action="/login" method="POST">
+			<p id="close-login" class="close">X</p>
 			<input type="text" name="username" placeholder="username">
 			<input type="password" name="password" placeholder="password">
 			<button type="submit">LOGIN</button>
@@ -44,8 +44,8 @@
 	</div>
 
 	<div class="signup" id="signup-cont">
-		<button id="close-signup" class="close"></button>
 		<form action="/sign-up" method="POST">
+			<p id="close-signup" class="close">X</p>
 			<input type="text" name="username" placeholder="username">
 			<input type="password" name="password" placeholder="password">
 			<input type="email" name="email" placeholder="email">

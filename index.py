@@ -2,6 +2,17 @@ from bottle import *
 from sqlgenerator import *
 from users import *
 import smtplib
+from beaker.middleware import SessionMiddleware
+
+# session stillingar
+session_opts = {
+    'session.type': 'file',
+    'session.data_dir': './data',
+    'session.auto': True
+}
+
+app = SessionMiddleware(app(), session_opts)
+s = request.environ.get('beaker.session')
 
 
 def updateData():
@@ -80,8 +91,19 @@ def search():
     return template("search.tpl", items=found, all=items)
 
 
+@route("/item")
+def item():
+    data, items, users, uids = updateData()
+    iid = int(request.query.id)
+
+    item = list(filter(lambda x: x["iid"] == iid, items))[0]
+
+    return template("item.tpl", item=item)
+
+
 @route("/sign-up", method="POST")
 def sign_up():
+    s = request.environ.get('beaker.session')
     data, items, users, uids = updateData()
 
     username = request.forms.get("username")
@@ -93,49 +115,58 @@ def sign_up():
     uid = random_uid(uids)
 
     if check_user(users, username):
-        executeQuery(USERS.insert(data=("uid", "username", "passwd", "email", "fname", "lname"),
-                     dataval=(uid, username, password, email, fname, lname)))
-        # setja session á user
+        try:
+            executeQuery(USERS.insert(
+                data=("uid", "username", "passwd", "email", "fname", "lname"),
+                dataval=(uid, username, password, email, fname, lname)))
+            s["user"] = username
+        except Exception as error:
+            return error
     else:
-        # username tekið
-        pass
+        return """<script>alert("Þetta notendanafn er tekið...")
+                  ;window.location.replace("/");</script>"""
     redirect("/")
 
 
 @route("/login", method="POST")
 def login():
+    s = request.environ.get('beaker.session')
     data, items, users, uids = updateData()
 
     username = request.forms.get("username")
     password = request.forms.get("password")
 
     if check_user(users, username, password):
-        pass  # set session á þennan user
+        s["user"] = username
     else:
-        pass  # rangt username og pass
+        return """<script>alert("Innskráning tókst ekki\\nprufaðu username: admin, password: admin")
+                  ;window.location.replace("/");</script>"""
     redirect("/")
 
 
 @route("/logout")
 def logout():
-    # ef loggaður inn?
-    redirect("/")  # taka session af þessum user
+    s = request.environ.get('beaker.session')
+    if s["user"] != "":  # taka session af þessum user
+        s["user"] = ""
+    redirect("/")
 
 
 @route("/forgot", method="POST")
 def forgot():
     data, items, users, uids = updateData()
-    
+
     address = request.forms.get("email")
-    
+
     uuid = int(list(map(lambda x: x["uid"],
                         list(filter(lambda x: x["email"] == address, users))))[0])
 
     rpass = random_password()
 
-    USERS.update(data=("passwd"), dataval=(rpass), where=("uid"), whereval=(uuid))
+    USERS.update(data=("passwd"), dataval=(rpass),
+                 where=("uid"), whereval=(uuid))
 
-    string =  "Hérna er nýja passwordið þitt: %s" % rpass
+    string = "Hérna er nýja passwordið þitt: %s" % rpass
 
     mail = smtplib.SMTP("smtp.gmail.com", 587)
     mail.ehlo()
@@ -145,4 +176,4 @@ def forgot():
     mail.close()
 
 
-run(host="localhost", port=8080, debug=True)
+run(app=app, port=8080, debug=True, reloader=True)

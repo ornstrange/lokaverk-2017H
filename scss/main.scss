@@ -19,7 +19,6 @@ body {
 	color: $black;
 	width: 100%;
 	margin: 0 auto;
-	background: url("../img/pattern.png");
 	overflow-x: hidden;
 }
 
@@ -196,10 +195,9 @@ header {
 		}
 
 		.user-content {
-			// display: none;
 			box-sizing: border-box;
 			position: absolute;
-			right: -120px;
+			right: -130px;
 			top: 79px;
 			background: $white;
 			border: 1px solid $black;
@@ -254,20 +252,18 @@ header {
 		background: transparentize($black, $amount: .1);
 
 		.close {
-			z-index: 3;
-			position: absolute;
-			height: 16px;
 			width: 16px;
-			background: $accent;
-			border-radius: 50%;
+			height: 16px;
+			margin: 0;
 			font-weight: 600;
-			font-size: 12px;
-			line-height: 16px;
-			text-align: center;
-			transform: scale(1.2);
-			color: darken($accent, $amount: 28%);
-			top: 41vh;
-			left: 60vw;
+			font-size: 20px;
+			color: $black;
+			cursor: pointer;
+			position: relative;
+			margin: 0;
+			top: -25px;
+			// text-align: right;
+			float: right
 		}
 
 		form {
@@ -285,7 +281,8 @@ header {
 			background: $white;
 
 			input {
-				width: 100%;
+				padding-left: 4px;
+				width: calc(100% - 8px);
 				height: 32px;
 				margin: 6px 0;
 			}
@@ -323,21 +320,20 @@ header {
 		background: transparentize($black, $amount: .1);
 
 		.close {
-			z-index: 3;
-			position: absolute;
-			height: 16px;
 			width: 16px;
-			background: $accent;
-			border-radius: 50%;
+			height: 16px;
+			margin: 0;
 			font-weight: 600;
-			font-size: 12px;
-			line-height: 16px;
-			text-align: center;
-			transform: scale(1.2);
-			color: darken($accent, $amount: 28%);
-			top: 31vh;
-			left: 60vw;
+			font-size: 20px;
+			color: $black;
+			cursor: pointer;
+			position: relative;
+			margin: 0;
+			top: -25px;
+			// text-align: right;
+			float: right
 		}
+
 
 		form {
 			box-sizing: border-box;
@@ -386,10 +382,9 @@ header {
 .land-page {
 	width: 100%;
 	overflow: hidden;
-	height: 600px;
+	height: 702px;
 	background: url("../img/land-test.jpg");
 	background-size: 33%;
-	box-shadow: 0 8px 16px rgba(0,0,0,.15);
 
 	.land-list {
 		position: relative;
@@ -398,19 +393,16 @@ header {
 		top: 160px;
 		width: 156px;
 		height: 132px;
-		background: $white;
-		border: 1px solid $black;
 		letter-spacing: 1px;
 		text-transform: uppercase;
 		padding: 16px;
 
 		li {
 			height: 44px;
-			background: $white;
 			color: $gray;
-			transition: .3s color ease-out;
 
 			&:hover {
+				background: $white;
 				color: $black;
 				outline: 1px solid $black;
 				outline-offset: -3px;

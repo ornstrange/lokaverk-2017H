@@ -8,6 +8,19 @@
 	<link rel="stylesheet" href="css/normalize.css">
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<link rel="stylesheet" href="css/main.css">
+	<style>
+		% if len(items) % 3 == 0:
+			.products .items-container{grid-template-columns: 1fr 1fr 1fr !important;}
+			.products .items-container .item:hover {transform: scale(1.1);}
+		% end
+		% if len(items) % 5 == 0:
+			.products .items-container{grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important;}
+			.products .items-container .item:hover {transform: scale(1.3);}
+		% end
+		% if len(items) % 4 == 0:
+			.products .items-container{grid-template-columns: 1fr 1fr 1fr 1fr !important;}
+		% end
+	</style>
 </head>
 <body>
 	%include("header.tpl")
