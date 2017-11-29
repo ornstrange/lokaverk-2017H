@@ -59,6 +59,29 @@ class Sql:
                 query += " WHERE " + where + " " + operator + " " + whereval
         return query + ";"
 
+    def insert(self, data="", dataval=""):
+        query = "INSERT INTO " + self.table + " "
+        if data != "":
+            if isinstance(data, tuple):
+                query += "("
+                for i in data:
+                    query += i + ", "
+                query = query[:len(query) - 2]
+                query += ") "
+                if isinstance(dataval[0], tuple):
+                    query += "VALUES ("
+                    for j in dataval:
+                        query += str(j) + ", "
+                    query = query[:len(query) - 2]
+                    query += ")"
+                else:
+                    query += "VALUES " + str(dataval)
+            else:
+                query += " VALUES " + str(dataval)
+        else:
+            return "INSERT INTO " + self.table + " VALUES " + str(dataval)
+        return query + ";"
+
     def delete(self, data="", where="", whereval="", operator="="):
         if isinstance(data, tuple):
             query = "DELETE " + str(data)[1:-1] + " FROM " + self.table
@@ -100,3 +123,8 @@ def executeQuery(s):
             CONNECTION.commit()
         finally:
             cursor.close()
+
+
+ITEMS = Sql("items")
+USERS = Sql("users")
+CART = Sql("cart")

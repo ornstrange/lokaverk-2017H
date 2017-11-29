@@ -20,6 +20,7 @@
 		</form>
 		<button class="search"><i class="fa fa-search" aria-hidden="true" id="srch-btn"></i></button>
 	</div>
+
 	<div class="user-items">
 		<button class="user"><i class="fa fa-user" aria-hidden="true" id="user-btn"></i></button>
 		<div class="user-content" id="user-cont">
@@ -31,6 +32,15 @@
 				<li class="item"><button id="cart-btn">cart</button></li>
 			</ul>
 		</div>
+	</div>
+
+	<div class="login" id="login-cont">
+		<a class="close" href="/">X</a>
+		<form action="/login" method="POST">
+			<input type="text" name="username" placeholder="username">
+			<input type="password" name="password" placeholder="password">
+			<button type="submit">LOGIN</button>
+		</form>
 	</div>
 </header>
 <script src="js/main.js"></script>

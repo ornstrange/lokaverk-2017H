@@ -1,17 +1,15 @@
 from bottle import *
 from sqlgenerator import *
-
-ITEMS = Sql("items")
-USERS = Sql("users")
+from users import *
+import smtplib
 
 
 def updateData():
     data = [executeQuery(ITEMS.all()), executeQuery(USERS.all())]
-    return data
+    return (data, data[0], data[1])
 
 
-data = updateData()
-items, users = data[0], data[1]
+data, items, users = updateData()
 
 
 def search_items(strings):
@@ -76,10 +74,66 @@ def root():
 
 @route("/search")
 def search():
-    updateData()
+    data, items, users = updateData()
     srch = request.query.s
     found = search_items(srch)
     return template("search.tpl", items=found, all=items)
+
+
+@route("/sign-up", method="POST")
+def sign_up():
+    data, items, users = updateData()
+
+    username = request.forms.get("username")
+    password = request.forms.get("password")
+    email = request.forms.get("email")
+    fname = request.forms.get("fname")
+    lname = request.forms.get("lname")
+
+    if check_user(users, username):
+        USERS.insert(data=("uid", "username", "passwd", "email", "fname", "lname"),
+                     dataval=(username, password, email, fname, lname))
+    redirect("/")
+
+
+@route("/login", method="POST")
+def login():
+    data, items, users = updateData()
+
+    username = request.forms.get("username")
+    password = request.forms.get("password")
+
+    if check_user(users, username, password):
+        pass  # set session á þennan user
+    else:
+        pass  # rangt username og pass
+    redirect("/")
+
+
+@route("logout")
+def logout():
+    # ef loggaður inn?
+    redirect("/")  # taka session af þessum user
+
+
+@route("/forgot", method="POST")
+def forgot():
+    address = request.forms.get("email")
+    
+    uuid = int(list(map(lambda x: x["uid"],
+                        list(filter(lambda x: x["email"] == address, users))))[0])
+
+    rpass = random_password()
+
+    USERS.update(data=("passwd"), dataval=(rpass), where=("uid"), whereval=(uuid))
+
+    mail = smtplib.SMTP("smtp.gmail.com", 587)
+    mail.ehlo()
+    mail.starttls()
+    mail.login("noreply.tskoli@gmail.com", "lokaverk123")
+    mail.sendmail("noreply.tskoli@gmail.com", address,
+                  "Hérna er nýja passwordið þitt: %s" % rpass)
+    mail.close()
 
 
 run(host="localhost", port=8080, debug=True)

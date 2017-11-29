@@ -86,7 +86,7 @@ header {
 
 		.menu-content {
 			position: relative;
-			z-index: 99;
+			z-index: 2;
 			top: 44px;
 			left: -48px;
 			color: $gray;
@@ -240,6 +240,76 @@ header {
 		.user-content-active {
 			right: 0;
 		}
+	}
+
+	.login {
+		visibility: hidden;
+		z-index: 3;
+		position: absolute;
+		margin: 0;
+		left: 0;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+		background: transparentize($black, $amount: .1);
+
+		.close {
+			z-index: 3;
+			position: absolute;
+			height: 16px;
+			width: 16px;
+			background: $accent;
+			border-radius: 50%;
+			font-weight: 600;
+			font-size: 12px;
+			line-height: 16px;
+			text-align: center;
+			transform: scale(1.2);
+			color: darken($accent, $amount: 28%);
+			top: 41vh;
+			left: 60vw;
+		}
+
+		form {
+			box-sizing: border-box;
+			position: absolute;
+			box-sizing: border-box;
+			outline: 4px solid $white;
+			border: 1px solid $black;
+			width: 362px;
+			height: 224px;
+			left: calc(50vw - 144px);
+			top: calc(48vh - 80px);
+			padding: 32px;
+			padding-top: 48px;
+			background: $white;
+
+			input {
+				width: 100%;
+				height: 32px;
+				margin: 6px 0;
+			}
+
+			button {
+				width: 100%;
+				height: 32px;
+				margin-top: 8px;
+				background: $black;
+				font-weight: 600;
+				letter-spacing: 1px;
+
+				&:hover {
+					transform: none;
+					color: $black !important;
+					background: $white;
+					outline: 1px solid $black;
+				}
+			}
+		}
+	}
+
+	.login-active {
+		visibility: visible;
 	}
 }
 

@@ -41,6 +41,11 @@ $('#user-btn').click(function(event){
 	event.stopPropagation();
 });
 
+// login
+$('#login-btn').click(function(){
+	$("#login-cont").addClass("login-active");
+});
+
 // search
 $('#srch-btn').click(function(){
 	if (!srchClicked) {
