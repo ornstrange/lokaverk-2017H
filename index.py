@@ -3,6 +3,7 @@ from sqlgenerator import *
 from users import *
 import smtplib
 from beaker.middleware import SessionMiddleware
+import os
 
 # session stillingar
 session_opts = {
@@ -176,4 +177,4 @@ def forgot():
     mail.close()
 
 
-run(app=app, port="8080")
+run(app=app, port=os.environ.get('PORT'))
