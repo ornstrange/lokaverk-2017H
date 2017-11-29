@@ -6,10 +6,10 @@ import smtplib
 
 def updateData():
     data = [executeQuery(ITEMS.all()), executeQuery(USERS.all())]
-    return (data, data[0], data[1])
+    return (data, data[0], data[1], list(map(lambda x: x["uid"], data[1])))
 
 
-data, items, users = updateData()
+data, items, users, uids = updateData()
 
 
 def search_items(strings):
@@ -74,7 +74,7 @@ def root():
 
 @route("/search")
 def search():
-    data, items, users = updateData()
+    data, items, users, uids = updateData()
     srch = request.query.s
     found = search_items(srch)
     return template("search.tpl", items=found, all=items)
@@ -82,7 +82,7 @@ def search():
 
 @route("/sign-up", method="POST")
 def sign_up():
-    data, items, users = updateData()
+    data, items, users, uids = updateData()
 
     username = request.forms.get("username")
     password = request.forms.get("password")
@@ -90,15 +90,21 @@ def sign_up():
     fname = request.forms.get("fname")
     lname = request.forms.get("lname")
 
+    uid = random_uid(uids)
+
     if check_user(users, username):
-        USERS.insert(data=("uid", "username", "passwd", "email", "fname", "lname"),
-                     dataval=(username, password, email, fname, lname))
+        executeQuery(USERS.insert(data=("uid", "username", "passwd", "email", "fname", "lname"),
+                     dataval=(uid, username, password, email, fname, lname)))
+        # setja session á user
+    else:
+        # username tekið
+        pass
     redirect("/")
 
 
 @route("/login", method="POST")
 def login():
-    data, items, users = updateData()
+    data, items, users, uids = updateData()
 
     username = request.forms.get("username")
     password = request.forms.get("password")
@@ -110,7 +116,7 @@ def login():
     redirect("/")
 
 
-@route("logout")
+@route("/logout")
 def logout():
     # ef loggaður inn?
     redirect("/")  # taka session af þessum user
@@ -118,6 +124,8 @@ def logout():
 
 @route("/forgot", method="POST")
 def forgot():
+    data, items, users, uids = updateData()
+    
     address = request.forms.get("email")
     
     uuid = int(list(map(lambda x: x["uid"],
@@ -127,12 +135,13 @@ def forgot():
 
     USERS.update(data=("passwd"), dataval=(rpass), where=("uid"), whereval=(uuid))
 
+    string =  "Hérna er nýja passwordið þitt: %s" % rpass
+
     mail = smtplib.SMTP("smtp.gmail.com", 587)
     mail.ehlo()
     mail.starttls()
     mail.login("noreply.tskoli@gmail.com", "lokaverk123")
-    mail.sendmail("noreply.tskoli@gmail.com", address,
-                  "Hérna er nýja passwordið þitt: %s" % rpass)
+    mail.sendmail("noreply.tskoli@gmail.com", address, string)
     mail.close()
 
 

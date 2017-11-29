@@ -45,6 +45,21 @@ $('#user-btn').click(function(event){
 $('#login-btn').click(function(){
 	$("#login-cont").addClass("login-active");
 });
+$('#close-login').click(function(){
+	$("#login-cont").removeClass("login-active");
+});
+// signup
+$('#sign-btn').click(function(){
+	$("#signup-cont").addClass("signup-active");
+});
+$('#close-signup').click(function(){
+	$("#signup-cont").removeClass("signup-active");
+});
+// logout
+$('#logout-btn').click(function(){
+	window.location.href = "/logout";
+	return false;
+});
 
 // search
 $('#srch-btn').click(function(){

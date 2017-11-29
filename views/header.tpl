@@ -35,11 +35,23 @@
 	</div>
 
 	<div class="login" id="login-cont">
-		<a class="close" href="/">X</a>
+		<button id="close-login" class="close"></button>
 		<form action="/login" method="POST">
 			<input type="text" name="username" placeholder="username">
 			<input type="password" name="password" placeholder="password">
 			<button type="submit">LOGIN</button>
+		</form>
+	</div>
+
+	<div class="signup" id="signup-cont">
+		<button id="close-signup" class="close"></button>
+		<form action="/sign-up" method="POST">
+			<input type="text" name="username" placeholder="username">
+			<input type="password" name="password" placeholder="password">
+			<input type="email" name="email" placeholder="email">
+			<input type="text" name="fname" placeholder="first name">
+			<input type="text" name="lname" placeholder="last name">
+			<button type="submit">SIGNUP</button>
 		</form>
 	</div>
 </header>

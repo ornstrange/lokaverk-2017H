@@ -1,7 +1,4 @@
-from pymysql import connect, cursors
-from bottle import *
 from random import randint
-from sqlgenerator import *
 
 BASE64ALPH = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
 
@@ -11,6 +8,12 @@ def random_password():
     for i in range(8):
         s += BASE64ALPH[randint(0, 63)]
     return s
+
+def random_uid(uids):
+    r = randint(0, 255)
+    while r in uids:
+        r = randint(0, 255)
+    return r
 
 
 def check_user(users, u, p=""):
