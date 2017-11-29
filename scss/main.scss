@@ -382,7 +382,7 @@ header {
 .land-page {
 	width: 100%;
 	overflow: hidden;
-	height: 702px;
+	height: 602px;
 	background: url("../img/land-test.jpg");
 	background-size: 33%;
 
@@ -413,6 +413,39 @@ header {
 				height: 44px;
 				line-height: 44px;
 				padding-left: 16px;
+			}
+		}
+	}
+}
+
+// ABOUT
+.about {
+	width: 80vw;
+	height: 320px;
+	margin: 0 auto;
+
+	.title {
+		background: $black;
+		color: $white;
+		padding: 8px;
+		text-align: center;
+	}
+
+	.text {
+		box-sizing: border-box;
+		border: 1px solid $black;
+		width: 60%;
+		text-align: justify;
+		padding: 32px;
+		margin: 32px auto 0 auto;
+		font-size: 24px;
+
+		a {
+			color: $dark-gray;
+
+			&:hover {
+				color: $black;
+				border-bottom: 1px solid $black;
 			}
 		}
 	}

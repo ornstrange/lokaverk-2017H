@@ -18,6 +18,18 @@
 			<li class="tops"><a href="/search?s=$top">tops</a></li>
 		</ul>
 	</div>
+
+	<div class="about">
+		<h1 class="title">
+			ABOUT US
+		</h1>
+		<p class="text">
+			LATE is a company founded in 2017 in Brussel, Belgium.
+			It concentrates on selling customers high quality products for an affordable price.
+			We are an international company which sells clothes all around the world.<br>
+			For contact click <a href="#contact">here</a>
+		</p>
+	</div>
 	<script
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
