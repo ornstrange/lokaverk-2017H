@@ -1,5 +1,3 @@
 bottle
 beaker
 pymysql
-users
-sqlgenerator
