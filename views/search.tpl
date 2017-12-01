@@ -10,35 +10,58 @@
 	<link rel="stylesheet" href="css/main.css">
 	<style>
 		% if len(items) % 3 == 0:
-			.products .items-container{grid-template-columns: 1fr 1fr 1fr !important;}
-			.products .items-container .item:hover {transform: scale(1.1);}
+			.products .items-container{grid-template-columns: 1fr 1fr 1fr !important;
+																 grid-gap: 80px !important;}
 		% end
 		% if len(items) % 5 == 0:
-			.products .items-container{grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important;}
-			.products .items-container .item:hover {transform: scale(1.3);}
+			.products .items-container{grid-template-columns: 1fr 1fr 1fr 1fr 1fr !important;
+																 grid-gap: 16px !important;
+																 width: calc(80vw - 1px);}
 		% end
 		% if len(items) % 4 == 0:
-			.products .items-container{grid-template-columns: 1fr 1fr 1fr 1fr !important;}
+			.products .items-container{grid-template-columns: 1fr 1fr 1fr 1fr !important;
+																 grid-gap: 16px !important;
+																 width: 80vw;}
 		% end
+		{}
 	</style>
 </head>
 <body>
 	%include("header.tpl")
+	
 	<section class="products">
+		<div class="sorter">
+			<a href="/search?s={{srch}}&srt=mu">LOW - HIGH</a>
+			<a href="/search?s={{srch}}&srt=md">HIGH - LOW</a>
+			<a href="/search?s={{srch}}&srt=co">COLOR</a>
+		</div>
+
+		%if sort == "mu": all = sorted(all, key=lambda x: x["price"])
+		%end
+		%if sort == "md": all = sorted(all, key=lambda x: x["price"], reverse=True)
+		%end
+		%if sort == "co": all = sorted(all, key=lambda x: x["color"])
+		%end
+
 		<div class="items-container">
-		% for i in items:
-			<a href="/item?id={{all[i-1]["iid"]}}" class="item iid-{{all[i-1]["iid"]}}">
-				<img class="lazy" src="img/temp.gif" data-original="img/items/item-{{all[i-1]["iid"]}}.jpg">
-				<p class="text">{{all[i-1]["iname"].upper()}}</p>
-				<p class="price">{{all[i-1]["price"]}}&euro;</p>
+		% for i in all:
+			% if i["iid"] in items:
+			<a href="/item?id={{i["iid"]}}" class="item iid-{{i["iid"]}}">
+				<img class="lazy" src="img/temp.gif" data-original="img/items/item-{{i["iid"]}}.jpg">
+				<p class="text">{{i["iname"].upper()}}</p>
+				<p class="price">{{i["price"]}}&euro;</p>
 			</a>
+			% end
 		% end
 		</div>
 	</section>
+
+	% include("footer.tpl")
 	<script
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
 	<script src="js/jquery.lazyload.js"></script>
 	<script src="js/main.js"></script>
 </body>

@@ -1,14 +1,21 @@
 // COLORS
 $white: #FFF;
-$light-gray: #DDD;
+$black: #000;
+// $white: #333;
+// $black: #EEE;
+$light-gray: #CCC;
 $gray: #AAA;
 $dark-gray: #666;
-$black: #000;
 $pink: #FFCED2;
 $accent: #FF1D30;
 $col1: #FFCED2;
 $col2: #FFFCDC;
 
+// VARS
+$full-width: 100vw;
+$general-width: 80vw;
+$smaller-width: 60vw;
+$smallest-width: 40vw;
 
 // GLOBAL
 body {
@@ -17,7 +24,8 @@ body {
 	letter-spacing: .5px;
 	font-size: 18px;
 	color: $black;
-	width: 100%;
+	background: $white;
+	width: $full-width;
 	margin: 0 auto;
 	overflow-x: hidden;
 }
@@ -37,7 +45,7 @@ button {
 
 	&:hover {
 		transform: scale(1.2);
-		color: $white !important;
+		color: $black !important;
 		transition: 0s all;
 	}
 }
@@ -57,15 +65,19 @@ a {
 	text-decoration: none;
 }
 
+.hidden {
+	visibility: hidden;
+}
+
 // MAIN
 // HEADER
 header {
 	width: 100%;
-	background: $black;
+	background: $white;
 	height: 64px;
-	margin: 0 auto;
+	margin: 0 auto 32px auto;
 	padding: 8px 0;
-	border-bottom: 16px solid #FAFAFA;
+	border-bottom: 1px solid $black;
 
 	.items {
 		display: flex;
@@ -76,35 +88,38 @@ header {
 		justify-content: center;
 
 		.menu {
+			position: absolute;
+			left: 0;
 			font-size: 32px;
 			width: 64px;
 			height: 60px;
 			margin: 0;
 			float: left;
+			color: $light-gray;
 		}
 
 		.menu-content {
-			position: relative;
-			z-index: 2;
-			top: 44px;
-			left: -48px;
+			z-index: 999;
+			width: 168px;
+			height: 296px;
+			box-sizing: border-box;
+			position: absolute;
+			top: 81px;
+			left: -202px;
 			color: $gray;
-			width: 200px;
-			height: 0;
 			font-size: 18px;
 			text-transform: uppercase;
 			outline: 0 solid $black;
-			box-shadow: 0;
 			background: $white;
 			padding: 4px;
 			transition: .3s all ease-out;
-			overflow: hidden;
-			pointer-events: none;
+			outline: 1px solid $black;
 
 			.item {
 				height: 40px;
 				background: transparent;
-				color: $white;
+				color: $gray;
+				background: $white;
 				transition: .3s color ease-out;
 
 				&:hover {
@@ -123,8 +138,9 @@ header {
 			
 			.filler {
 				height: 1px;
+				width: 152px;
 				background: $black !important;
-				margin: 4px 0;
+				margin: 4px auto;
 			
 				&:hover {
 					background: $black;
@@ -132,16 +148,7 @@ header {
 			}
 		}
 		.menu-content-active {
-			height: 290px;
-			top: 189px;
-			outline: 1px solid $black;
-			background: $white;
-			pointer-events: initial;
-
-			.item {
-				color: $gray;
-				background: $white;
-			}
+			left: 0;
 		}
 
 		.search {
@@ -150,6 +157,7 @@ header {
 			height: 60px;
 			margin: 0;
 			float: right;
+			color: $light-gray;
 		}
 
 		.srch-inp {
@@ -167,12 +175,13 @@ header {
 		.srch-inp-active {
 			background: #fff;
 			width: 250px;
+			outline: 1px solid $black;
 		}
 
 		.title {
 			font-size: 42px;
 			letter-spacing: 8px;
-			color: $white;
+			color: $black;
 			width: 100%;
 			height: 64px;
 			text-align: center;
@@ -192,19 +201,19 @@ header {
 			float: right;
 			top: 10px;
 			right: 10px;
+			color: $light-gray;
 		}
 
 		.user-content {
 			box-sizing: border-box;
 			position: absolute;
 			right: -130px;
-			top: 79px;
+			top: 80px;
 			background: $white;
 			border: 1px solid $black;
 			height: 168px;
 			width: 120px;
 			padding-top: 2px;
-			box-shadow: -2px 4px 8px rgba(0,0,0,.15);
 			transition: .3s right ease;
 
 			.item {
@@ -236,7 +245,7 @@ header {
 		}
 
 		.user-content-active {
-			right: 0;
+			right: -1px;
 		}
 	}
 
@@ -250,6 +259,17 @@ header {
 		width: 100vw;
 		height: 100vh;
 		background: transparentize($black, $amount: .1);
+
+		.forgot {
+			z-index: 5;
+			position: relative;
+			left: calc(50vw - 118px);
+			top: calc(48vh - 56px);
+
+			&:hover {
+				transform: none;
+			}
+		}
 
 		.close {
 			width: 16px;
@@ -269,15 +289,13 @@ header {
 		form {
 			box-sizing: border-box;
 			position: absolute;
-			box-sizing: border-box;
 			outline: 4px solid $white;
 			border: 1px solid $black;
 			width: 362px;
 			height: 224px;
 			left: calc(50vw - 144px);
 			top: calc(48vh - 80px);
-			padding: 32px;
-			padding-top: 48px;
+			padding: 48px 32px 32px 32px;
 			background: $white;
 
 			input {
@@ -376,13 +394,79 @@ header {
 	.signup-active {
 		visibility: visible;
 	}
+
+	.forgot-cont {
+		visibility: hidden;
+		z-index: 3;
+		position: absolute;
+		margin: 0;
+		left: 0;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+		background: transparentize($black, $amount: .1);
+
+		.close {
+			width: 16px;
+			height: 16px;
+			margin: 0;
+			font-weight: 600;
+			font-size: 20px;
+			color: $black;
+			cursor: pointer;
+			position: relative;
+			margin: 0;
+			top: -25px;
+			// text-align: right;
+			float: right
+		}
+
+		form {
+			box-sizing: border-box;
+			position: absolute;
+			outline: 4px solid $white;
+			border: 1px solid $black;
+			width: 362px;
+			height: 176px;
+			left: calc(50vw - 144px);
+			top: calc(48vh - 80px);
+			padding: 48px 32px 32px 32px;
+			background: $white;
+
+			input {
+				padding-left: 4px;
+				width: calc(100% - 8px);
+				height: 32px;
+				margin: 6px 0;
+			}
+
+			button {
+				width: 100%;
+				height: 32px;
+				margin-top: 8px;
+				background: $black;
+				font-weight: 600;
+				letter-spacing: 1px;
+
+				&:hover {
+					transform: none;
+					color: $black !important;
+					background: $white;
+					outline: 1px solid $black;
+				}
+			}
+		}
+	}
+	.forgot-cont-active {
+		visibility: visible;
+	}
 }
 
 // LAND PAGE
 .land-page {
 	width: 100%;
 	overflow: hidden;
-	height: 602px;
+	height: 552px;
 	background: url("../img/land-test.jpg");
 	background-size: 33%;
 
@@ -420,13 +504,14 @@ header {
 
 // ABOUT
 .about {
-	width: 80vw;
+	width: $full-width;
 	height: 320px;
-	margin: 0 auto;
+	margin: 32px auto 0 auto;
 
 	.title {
 		background: $black;
 		color: $white;
+		font-size: 24px;
 		padding: 8px;
 		text-align: center;
 	}
@@ -434,11 +519,12 @@ header {
 	.text {
 		box-sizing: border-box;
 		border: 1px solid $black;
-		width: 60%;
+		width: $smallest-width;
 		text-align: justify;
 		padding: 32px;
-		margin: 32px auto 0 auto;
-		font-size: 24px;
+		line-height: 22px;
+		margin: 16px auto 0 auto;
+		font-size: 18px;
 
 		a {
 			color: $dark-gray;
@@ -453,14 +539,42 @@ header {
 
 // ITEMS
 .products {
-	width: calc(100vw-1px);
+	width: $full-width;
 	background: $white;
-	padding-bottom: 20vh;
+	padding-bottom: 148px;
+
+	.sorter {
+		box-sizing: border-box;
+		position: fixed;
+		display: flex;
+		flex-direction: column;
+		font-size: 16px;
+		width: calc(10% + 2px);
+		left: 0;
+		top: 50%;
+
+		a {
+			box-sizing: border-box;
+			padding: 8px 0 8px 8px;
+			line-height: 24px;
+			// margin: 1px 0;
+			background: $white;
+			color: $black;
+			border-bottom: 1px solid $black;
+			border-right: 1px solid $black;
+
+			&:hover {
+				color: $white;
+				background: $black;
+			}
+		}
+	}
 
 	.items-container {
+		box-sizing: border-box;
 		display: grid;
 		margin: 0 auto;
-		width: 80vw;
+		width: $general-width;
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		grid-template-rows: auto;
 		grid-gap: 16px;
@@ -468,19 +582,21 @@ header {
 		justify-content: center;
 
 		.item {
-			border: 1px solid black;
+			box-sizing: border-box;
+			border: 1px solid $black;
 			padding: 8px;
 			background: $white;
 			transform-origin: center top;
 
 			&:hover {
-				transform: scale(1.2);
+				transform: scale(1.16);
 				z-index: 1;
 				outline-offset: -1px;
 				box-shadow: 0 8px 16px rgba(0,0,0,.15);
 			}
 
 			img {
+				box-sizing: border-box;
 				width: 100%;
 				outline: 2px solid $white;
 				margin: 0;
@@ -508,5 +624,221 @@ header {
 				filter: blur(2px) grayscale(50%);
 			}
 		}
+	}
+}
+
+// SINGLE-ITEM
+.single-item {
+	width: $smaller-width;
+	height: calc(100vh - 148px);
+	margin: 32px auto 0 auto;
+	box-sizing: border-box;
+
+	.img-link:focus {
+		outline: 0;
+	}
+
+	.pic {
+		width: 40%;
+		float: left;
+		border: 1px solid $black;
+		outline: 1px solid $white;
+		outline-offset: -2px;
+		box-sizing: border-box;
+	}
+
+	.text {
+		border: 1px solid $black;
+		box-sizing: border-box;
+		float: right;
+		width: 55%;
+		height: 124px;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 500;
+		letter-spacing: 1px;
+		text-align: center;
+	}
+	
+	.title {
+		box-sizing: border-box;
+		margin: 0;
+		padding-top: 32px;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 500;
+		letter-spacing: 1px;
+	}
+
+	.info {
+		box-sizing: border-box;
+		padding: 16px 0 0 16px;
+		margin: 0;
+	}
+
+	.color {
+		border: 1px solid $black;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 500;
+		letter-spacing: 1px;
+		text-align: center;
+		box-sizing: border-box;
+		margin-top: 32px;
+		width: 55%;
+		height: 40px;
+		background: $black;
+		float: right;
+		line-height: 40px;
+
+		.txt {
+			margin: 0 auto;
+			display: block;
+			width: 96px;
+			height: 38px;
+			box-sizing: border-box;
+			background: $white;
+			color: $black;
+		}
+	}
+
+	.buy-btn {
+		border: 1px solid $black;
+		box-sizing: border-box;
+		float: right;
+		width: 55%;
+		height: 64px;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 500;
+		letter-spacing: 1px;
+		line-height: 64px;
+		text-align: center;
+		margin-top: 32px;
+
+		&:hover {
+			background: $black;
+		}
+
+		.btn {
+			display: block;
+			width: 100%;
+			height: 100%;
+			color: $black !important;
+
+			&:hover {
+				transform: none;
+				color: $white !important;
+			}
+		}
+	}
+}
+
+// CART
+.cart-container {
+	box-sizing: border-box;
+	height: calc(100vh - 148px);
+	width: $full-width;
+	padding: 0;
+	margin: 0;
+
+	.cart {
+		width: $smallest-width;
+		border: 1px solid $black;
+		outline: 1px solid $white;
+		outline-offset: -2px;
+		box-sizing: border-box;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: 500;
+		letter-spacing: 1px;
+		margin: 32px auto 0 auto;
+		// height: calc(100vh - 148px);
+
+		.title {
+			text-align: center;
+		}
+
+		.item {
+			margin: 0 0 8px 16px;
+			padding-right: 8px;
+
+			.del-form {
+				margin: 0;
+				padding: 0;
+				float: right;
+			}
+		}
+
+		.total {
+			text-align: right;
+			padding-right: 16px;
+			margin-top: 32px;
+		}
+	}
+	.no-items {
+		box-sizing: border-box;
+		height: calc(100vh - 148px);
+		text-align: center;
+		font-size: 32px;
+		font-weight: 500;
+		letter-spacing: 2px;
+		padding-top: 35vh;
+		margin: 0;
+
+		span {
+			font-size: 24px;
+
+			button {
+				font-size: 24px !important;
+				padding: 0;
+
+				&:hover {
+					transform: none;
+				}
+			}
+
+			a {
+				padding-bottom: 8px;
+				color: $gray;
+
+				&:hover {
+					border-bottom: 1px solid $black;
+					color: $black;
+				}
+			}
+		}
+	}
+}
+
+// FOOTER
+footer {
+	box-sizing: border-box;
+	margin: 0;
+	width: $full-width;
+	height: 32px;
+	font-size: 16px;
+	font-weight: 500;
+	letter-spacing: 1px;
+	color: $black;
+	// background: $black;
+	border-top: 1px solid $black;
+	line-height: 32px;
+
+	.left {
+		box-sizing: border-box;
+		padding-left: 32px;
+		margin: 0;
+		width: 40%;
+		float: left;
+	}
+
+	.right {
+		box-sizing: border-box;
+		text-align: right;
+		padding-right: 32px;
+		margin: 0;
+		float: right;
+		width: 60%;
 	}
 }

@@ -27,13 +27,16 @@
 			LATE is a company founded in 2017 in Brussel, Belgium.
 			It concentrates on selling customers high quality products for an affordable price.
 			We are an international company which sells clothes all around the world.<br>
-			For contact click <a href="#contact">here</a>
+			For contact click <a href="mailto:late@late.be">here</a>
 		</p>
 	</div>
+
+	% include("footer.tpl")
 	<script
 	src="https://code.jquery.com/jquery-3.2.1.min.js"
 	integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
 	crossorigin="anonymous"></script>
+	<script type="text/javascript" src="js/jquery.fancybox.js"></script>
 	<script src="js/jquery.lazyload.js"></script>
 	<script src="js/main.js"></script>
 </body>

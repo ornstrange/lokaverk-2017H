@@ -30,6 +30,10 @@ $('html').click(function() {
 		$("#menu-cont").removeClass("menu-content-active");
 		menuClicked = false;
 	}
+	if (userClicked) {
+		$("#user-cont").removeClass("user-content-active");
+		userClicked = false;
+	}
 });
 $('#menu-btn').click(function(event){
 	event.stopPropagation();
@@ -45,10 +49,13 @@ $('#user-btn').click(function(event){
 $('#login-btn').click(function(){
 	$("#login-cont").addClass("login-active");
 });
+$('#login-btn2').click(function(){
+	$("#login-cont").addClass("login-active");
+});
 $('#close-login').click(function(){
 	$("#login-cont").removeClass("login-active");
 });
-// signup
+// forgotup
 $('#sign-btn').click(function(){
 	$("#signup-cont").addClass("signup-active");
 });
@@ -59,6 +66,19 @@ $('#close-signup').click(function(){
 $('#logout-btn').click(function(){
 	window.location.href = "/logout";
 	return false;
+});
+// cart
+$('#cart-btn').click(function(){
+	window.location.href = "/cart";
+	return false;
+});
+// forgot
+$('#forgot-btn').click(function(){
+	$("#forgot-cont").addClass("forgot-cont-active");
+	$("#login-cont").removeClass("login-active");
+});
+$('#close-forgot').click(function(){
+	$("#forgot-cont").removeClass("forgot-cont-active");
 });
 
 // search
@@ -73,7 +93,7 @@ $('#srch-btn').click(function(){
 		if (srchString == "") {
 			$("#srch-inp").removeClass("srch-inp-active");
 		} else {
-			window.location.href = "/search?s="+srchString;
+			window.location.href = "/search?s="+srchString+"&srt=mu";
 		}
 	}
 });
@@ -106,3 +126,6 @@ $("[class*=iid-]").hover(function() {
 
 // lazy load
 $("img.lazy").lazyload();
+
+// fancybox
+$.fancybox.defaults.toolbar = false;

@@ -35,6 +35,7 @@
 	</div>
 
 	<div class="login" id="login-cont">
+		<button class="forgot" id="forgot-btn">forgot password?</button>
 		<form action="/login" method="POST">
 			<p id="close-login" class="close">X</p>
 			<input type="text" name="username" placeholder="username">
@@ -54,5 +55,12 @@
 			<button type="submit">SIGNUP</button>
 		</form>
 	</div>
+
+	<div class="forgot-cont" id="forgot-cont">
+			<form action="/forgot" method="POST">
+				<p id="close-forgot" class="close">X</p>
+				<input type="email" name="email" placeholder="email">
+				<button type="submit">SEND EMAIL</button>
+			</form>
+		</div>
 </header>
-<script src="js/main.js"></script>
