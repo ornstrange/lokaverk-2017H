@@ -1,9 +1,5 @@
 bottle
 beaker
 pymysql
-os
-smtplib
 users
 sqlgenerator
-email.mime.multipart
-email.mime.text
