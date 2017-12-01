@@ -269,4 +269,4 @@ def cart():
     return template("cart.tpl", items=items, cart=ucart, total=total)
 
 
-run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+run(app=app, port=int(os.environ.get("PORT", 5000)), debug=True)
