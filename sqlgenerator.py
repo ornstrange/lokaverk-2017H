@@ -42,7 +42,7 @@ class Sql:
                 for i in range(1, len(data)):
                     query += ", " + data[i] + " = " + dataval[i]
             else:
-                query += data + " = " + dataval
+                query += data + " = \"" + dataval + "\""
         else:
             return "SELECT * FROM " + self.table + ";"
         if where:
@@ -56,7 +56,8 @@ class Sql:
                 else:
                     return "SELECT * FROM " + self.table + ";"
             else:
-                query += " WHERE " + where + " " + operator + " " + whereval
+                query += " WHERE " + where + " " + \
+                    operator + " " + whereval
         return query + ";"
 
     def insert(self, data="", dataval=""):

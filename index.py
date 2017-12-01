@@ -4,6 +4,8 @@ from users import *
 import smtplib
 from beaker.middleware import SessionMiddleware
 import os
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # session stillingar
 session_opts = {
@@ -160,6 +162,8 @@ def login():
         s["uid"] = int(list(map(lambda x: x["uid"],
                                 list(filter(lambda x: x["username"] == username,
                                             users))))[0])
+        return """<script>alert("Innskráning tókst\\nVelkominn aftur %s")
+                  ;window.location.replace("/");</script>""" % username
     else:
         return """<script>alert("Innskráning tókst ekki\\nprufaðu username: admin, password: admin")
                   ;window.location.replace("/");</script>"""
@@ -182,22 +186,36 @@ def forgot():
 
     address = request.forms.get("email")
 
-    uuid = int(list(map(lambda x: x["uid"],
+    uuid = str(list(map(lambda x: x["uid"],
                         list(filter(lambda x: x["email"] == address, users))))[0])
+
+    data, items, users, uids, cart = updateData()
+    usern = str(list(map(lambda x: x["username"],
+                         list(filter(lambda x: x["email"] == address, users))))[0])
 
     rpass = random_password()
 
-    USERS.update(data=("passwd"), dataval=(rpass),
-                 where=("uid"), whereval=(uuid))
+    executeQuery(USERS.update(data="passwd", dataval=rpass,
+                              where="uid", whereval=uuid))
 
-    string = "Hérna er nýja passwordið þitt: %s" % rpass
+    fromaddr = "noreply.tskoli@gmail.com"
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = address
+    msg['Subject'] = "Forgotten password"
 
-    mail = smtplib.SMTP("smtp.gmail.com", 587)
-    mail.ehlo()
-    mail.starttls()
-    mail.login("noreply.tskoli@gmail.com", "lokaverk123")
-    mail.sendmail("noreply.tskoli@gmail.com", address, string)
-    mail.close()
+    body = "Here's your new password %s: %s\nDont forget it again..." % (
+        usern, rpass)
+    msg.attach(MIMEText(body, 'plain'))
+
+    server = smtplib.SMTP('smtp.gmail.com', 587)
+    server.starttls()
+    server.login(fromaddr, "lokaverk123")
+    text = msg.as_string()
+    server.sendmail(fromaddr, address, text)
+    server.quit()
+
+    redirect("/")
 
 
 @route("/add-cart", method="POST")
@@ -252,6 +270,6 @@ def cart():
 
 
 if os.environ.get('APP_LOCATION') == 'heroku':
-    run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    run(app=app, port=int(os.environ.get("PORT", 5000)))
 else:
     run(app=app, port=8080, debug=True, reloader=True)

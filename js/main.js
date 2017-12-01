@@ -44,6 +44,9 @@ $('#menu-cont').click(function(event){
 $('#user-btn').click(function(event){
 	event.stopPropagation();
 });
+$('#user-cont').click(function(event){
+	event.stopPropagation();
+});
 
 // login
 $('#login-btn').click(function(){
