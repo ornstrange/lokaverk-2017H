@@ -1,6 +1,5 @@
 bottle
 beaker
-beaker.middleware
 pymysql
 os
 smtplib
