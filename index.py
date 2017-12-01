@@ -269,7 +269,4 @@ def cart():
     return template("cart.tpl", items=items, cart=ucart, total=total)
 
 
-if os.environ.get('APP_LOCATION') == 'heroku':
-    run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
-else:
-    run(app=app, port=8080, debug=True, reloader=True)
+run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
