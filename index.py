@@ -73,6 +73,21 @@ def search_items(strings):
     return (found, colors)
 
 
+@route("/favicon-16x16.png")
+def favico16():
+    return static_file("favicon-16x16.png", "./")
+
+
+@route("/favicon-32x32.png")
+def favico16():
+    return static_file("favicon-32x32.png", "./")
+
+
+@route("/favicon.ico")
+def favico16():
+    return static_file("favicon.ico", "./")
+
+
 @route("/css/<css:path>")
 def cssnorm(css):
     return static_file(css, "./css")
