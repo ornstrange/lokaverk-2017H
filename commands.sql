@@ -3,14 +3,13 @@ use 1910952789_fatasida;
 
 CREATE TABLE items (
     iid INT PRIMARY KEY NOT NULL,
-    iname VARCHAR(32) NOT NULL,
+    iname VARCHAR(100) NOT NULL,
     kind VARCHAR(32),
     color VARCHAR(16),
     amount INT,
-    size FLOAT,
     price INT,
-    arrivalDate DATE,
-    img VARCHAR(100)
+    new BOOLEAN,
+    img VARCHAR(200)
 );
 
 CREATE TABLE users (
@@ -34,3 +33,26 @@ CREATE TABLE cart (
     FOREIGN KEY (iid) REFERENCES items(iid),
     FOREIGN KEY (uid) REFERENCES users(uid)
 );
+
+delimiter //
+CREATE PROCEDURE total (OUT tot INT)
+    BEGIN
+    SELECT sum(price) INTO tot FROM items;
+    END//
+delimiter ;
+
+delimiter //
+CREATE PROCEDURE totalItems (OUT toti INT)
+    BEGIN
+    SELECT sum(amount) INTO toti FROM items;
+    END//
+delimiter ;
+
+delimiter //
+CREATE TRIGGER updateStock
+BEFORE UPDATE ON items
+FOR EACH ROW 
+	
+END IF;//
+delimiter ;
+
