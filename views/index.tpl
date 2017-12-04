@@ -19,7 +19,7 @@
 		</ul>
 	</div>
 
-	<div class="about">
+	<div class="about" id="about">
 		<h1 class="title">
 			ABOUT US
 		</h1>

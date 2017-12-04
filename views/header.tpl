@@ -9,8 +9,8 @@
 				<li class="item"><a href="/search?s=$jacket">jackets</a></li>
 				<li class="item"><a href="/search?s=$top">tops</a></li>
 				<li class="item filler"></li>
-				<li class="item lower"><a href="#about">about</a></li>
-				<li class="item bottom"><a href="#contact">contact</a></li>
+				<li class="item lower"><a href="/#about">about</a></li>
+				<li class="item bottom"><a href="mailto:late@late.be">contact</a></li>
 			</ul>
 		</div>
 		<h1 class="title">LATE</h1>
